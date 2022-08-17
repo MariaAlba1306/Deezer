@@ -8,6 +8,10 @@ import { ResultsComponent } from './results/results.component';
 import { DetailComponent } from './detail/detail.component';
 import { CabeceroComponent } from './cabecero/cabecero.component';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,8 +23,22 @@ import { NotfoundComponent } from './notfound/notfound.component';
     CabeceroComponent,
     NotfoundComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpTranslateLoader,
+        deps: [HttpClient],
+      },
+    }),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+//AOUT compilation support
+export function httpTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
