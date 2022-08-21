@@ -28,8 +28,8 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/css/jquery.slim.min.css",
-              "node_modules/tether/dist/js/tether.js",
+              // "node_modules/jquery/dist/css/jquery.slim.min.css",
+              // "node_modules/tether/dist/js/tether.js",
               "node_modules/bootstrap/dist/js/bootstrap.js"
             ]
           },

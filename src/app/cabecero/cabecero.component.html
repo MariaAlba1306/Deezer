@@ -1,6 +1,17 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
   <div class="container">
-    <a class="navbar-brand" routerLink="/">Deezer</a>
-    <div class="nav-item" >ES/EN</div>
+    <a class="navbar-brand" routerLink="/">{{ "Deezer" | translate }}</a>
+    <div class="nav-item"></div>
+    <span>
+      <select #selectedLang (change)="switchLang(selectedLang.value)">
+        <option
+          *ngFor="let language of translate.getLangs()"
+          [value]="language"
+          [selected]="language === translate.currentLang"
+        >
+          {{ language }}
+        </option>
+      </select>
+    </span>
   </div>
 </nav>

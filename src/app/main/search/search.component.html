@@ -1,12 +1,38 @@
-<div class="modal-content">
+<div class="container">
   <div class="modal-body">
-    <div class="form-group">
-      <label for="nombre"></label>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-8">
+        <input
+          type="text"
+          name="nombre"
+          class="form-control"
+          placeholder="{{ 'search' | translate }}"
+          [(ngModel)]="searchbox"
+        />
+      </div>
 
-      <input type="text" name="nombre" class="form-control" />
+      <div class="col-md-1">
+        <a class="btn btn-primary" (click)="takealook()">
+          {{ "save" | translate }}
+        </a>
+      </div>
+      <div class="col-md-2">
+        <a (click)="takealook()">
+          <img
+            src="https://t3.ftcdn.net/jpg/03/20/78/84/360_F_320788475_nEiLVViOBewea7taZWqNUR0lJAMTAaSo.jpg"
+          />
+        </a>
+      </div>
     </div>
-    <button type="submit" class="btn btn-primary">Guardar</button>
-    <div class="btn btn-secondary">Filtro</div>
   </div>
 </div>
+<!-- <table>
+  <tr *ngFor="let item of lista">
+    <td>
+      {{ item }}
+    </td>
+  </tr>
+</table> -->
+
 <app-list></app-list>

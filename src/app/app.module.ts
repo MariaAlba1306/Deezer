@@ -8,10 +8,11 @@ import { ResultsComponent } from './results/results.component';
 import { DetailComponent } from './detail/detail.component';
 import { CabeceroComponent } from './cabecero/cabecero.component';
 import { NotfoundComponent } from './notfound/notfound.component';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -22,10 +23,13 @@ import { HttpClientModule } from '@angular/common/http';
     DetailComponent,
     CabeceroComponent,
     NotfoundComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
