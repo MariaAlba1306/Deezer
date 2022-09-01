@@ -16,11 +16,12 @@
               <th>{{ "artists" | translate }}</th>
             </tr>
           </thead>
+
           <tbody>
-            <tr>
-              <td>I'm falling</td>
-              <td>Your song</td>
-              <td>Bon Iver</td>
+            <tr *ngFor="let item of favoriteArtists; let i = index">
+              <td scope="col">{{ item.name }}</td>
+              <td scope="col">{{ item.song }}</td>
+              <td scope="col">{{ item.album }}</td>
             </tr>
           </tbody>
         </table>

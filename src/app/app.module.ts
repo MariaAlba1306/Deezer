@@ -8,11 +8,15 @@ import { ResultsComponent } from './results/results.component';
 import { DetailComponent } from './detail/detail.component';
 import { CabeceroComponent } from './cabecero/cabecero.component';
 import { NotfoundComponent } from './notfound/notfound.component';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import {
+  TranslateLoader,
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ServicioService } from './service/servicio.service';
 
 @NgModule({
   declarations: [
@@ -23,10 +27,10 @@ import { FormsModule } from '@angular/forms';
     DetailComponent,
     CabeceroComponent,
     NotfoundComponent,
-    
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
@@ -38,7 +42,7 @@ import { FormsModule } from '@angular/forms';
       },
     }),
   ],
-  providers: [],
+  providers: [ServicioService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

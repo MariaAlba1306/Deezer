@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'detail', component: DetailComponent },
   { path: 'results', component: ResultsComponent },
   { path: '', component: NotfoundComponent },
+  { path: 'list', component: ListComponent },
 ];
 
 @NgModule({

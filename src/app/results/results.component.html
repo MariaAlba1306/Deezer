@@ -5,34 +5,89 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h4>{{ "ResultsFor" | translate }} ____</h4>
+            <h4>{{ "ResultsFor" | translate }} {{ name }}</h4>
           </div>
         </div>
-        <table class="table table-striped">
+        <div class="card" style="width: 18rem">
+          <img class="card-img-top" src="{{ image }}" alt="Card image cap" />
+          <div class="card-body">
+            <h5 class="card-title">{{ name }}</h5>
+
+            <p class="card-text">
+              {{ image }}
+            </p>
+            <!-- <a href="{{ preview }}" class="btn btn-primary" ngModel="{{ name }}"
+              >Go somewhere</a
+            > -->
+            <a
+              href="list"
+              class="btn btn-primary"
+              ngModel="{{ name }}"
+              (click)="favoriteArtist()"
+              >Añadir</a
+            >
+          </div>
+        </div>
+        <table class="table table-dark">
+          <thead>
+            <th scope="row">Songs</th>
+          </thead>
           <tbody>
             <tr>
-              <td>
+              <td scope="row">
                 <tr>
-                  I'm falling
+                  Canción
                 </tr>
-
-                <tr>
-                  Your song
-                </tr>
-                <tr>
-                  Bon Iver
+                <tr *ngFor="let item of searchResults; let i = index">
+                  <td scope="col">{{ i }}.- {{ item.title }}</td>
                 </tr>
               </td>
+              <td scope="row">
+                <tr>
+                  Artista
+                </tr>
 
-              <td>
-                <tr>
-                  <button>Añadir</button>
+                <tr *ngFor="let item of searchResults; let i = index">
+                  <td scope="col">{{ item.duration }}</td>
                 </tr>
-                <tr>
-                  <button>Añadir</button>
+              </td>
+              <td scope="row">
+                <tr *ngFor="let item of searchResults; let i = index">
+                  <td scope="col">{{ item.artist.name }}</td>
                 </tr>
-                <tr>
-                  <button>Añadir</button>
+              </td>
+              <td scope="row">
+                <tr *ngFor="let item of searchResults; let i = index">
+                  <td><button>Añadir</button></td>
+                </tr>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table table-dark">
+          <thead>
+            <th scope="row">Albums</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td scope="row">
+                <tr *ngFor="let item of searchResults; let i = index">
+                  <img src="{{ item.album.cover }}" />
+                </tr>
+              </td>
+              <td scope="row">
+                <tr *ngFor="let item of searchResults; let i = index">
+                  <td scope="col">{{ i }}.- {{ item.album.title }}</td>
+                </tr>
+              </td>
+              <td scope="row">
+                <tr *ngFor="let item of searchResults; let i = index">
+                  <td scope="col">{{ item.artist.name }}</td>
+                </tr>
+              </td>
+              <td scope="row">
+                <tr *ngFor="let item of searchResults; let i = index">
+                  <td><button>Añadir</button></td>
                 </tr>
               </td>
             </tr>
@@ -43,4 +98,3 @@
     <!-- tarjetas laterales -->
   </div>
 </section>
-

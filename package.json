@@ -21,6 +21,7 @@
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
     "bootstrap": "^5.2.0",
+    "deezer-public-api": "^1.0.4",
     "i18n": "^0.15.0",
     "i18next": "^21.9.1",
     "jquery": "^3.6.0",

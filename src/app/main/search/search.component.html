@@ -13,12 +13,12 @@
       </div>
 
       <div class="col-md-1">
-        <a class="btn btn-primary" (click)="takealook()">
+        <a class="btn btn-primary" routerLink="results" (click)="searchFinal()">
           {{ "save" | translate }}
         </a>
       </div>
       <div class="col-md-2">
-        <a (click)="takealook()">
+        <a (click)="searchFinal()">
           <img
             src="https://t3.ftcdn.net/jpg/03/20/78/84/360_F_320788475_nEiLVViOBewea7taZWqNUR0lJAMTAaSo.jpg"
           />
@@ -27,12 +27,9 @@
     </div>
   </div>
 </div>
-<!-- <table>
-  <tr *ngFor="let item of lista">
-    <td>
-      {{ item }}
-    </td>
-  </tr>
-</table> -->
 
-<app-list></app-list>
+<section id="clientes">
+  <!-- </section> -->
+
+  <app-list></app-list>
+</section>
