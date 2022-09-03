@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ServicioService } from './service/servicio.service';
+import { MusicService } from './service/music.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [ServicioService]
 })
 export class AppComponent {
   searchFinal(searchbox: any) {
@@ -17,7 +16,7 @@ export class AppComponent {
   searchResults: any;
   constructor(
     public translate: TranslateService,
-    private servicioService: ServicioService
+    public musicService: MusicService
   ) {
     translate.addLangs(['en', 'es']);
     const lang = translate.getBrowserLang();
@@ -25,7 +24,7 @@ export class AppComponent {
     translate.setDefaultLang('en');
     // }
   }
-  ngOnInit(){
-    this.searchResults = this.servicioService.searchResults
+  ngOnInit() {
+    this.searchResults = this.musicService.searchResults;
   }
 }

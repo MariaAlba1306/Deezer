@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
+import { makeBindingParser } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ServicioService } from 'src/app/service/servicio.service';
+import { MusicService } from 'src/app/service/music.service';
 
 @Component({
   selector: 'app-search',
@@ -15,17 +16,15 @@ export class SearchComponent implements OnInit {
 
   album: any;
   searchResults: any;
-  constructor(private servicioService: ServicioService) {}
+  constructor(public musicService: MusicService) {}
 
   searchFinal() {
-    this.servicioService.searchBox(this.searchbox);
+    this.musicService.searchBox(this.searchbox);
   }
   get favoriteArtists(): any {
-    return this.servicioService.favoriteArtists;
-  }
-  hello() {
-    console.log(this.favoriteArtists);
+    return this.musicService.favoriteArtists;
   }
 
+  openFilter() {}
   ngOnInit(): void {}
 }

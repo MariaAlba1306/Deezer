@@ -1,36 +1,58 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ServicioService } from 'src/app/service/servicio.service';
-import { Injectable } from '@angular/core';
-@Injectable()
+import { MusicService } from 'src/app/service/music.service';
+// import { Injectable } from '@angular/core';
+// @Injectable()
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.css'],
 })
 export class ResultsComponent implements OnInit {
+  favoriteSong: any;
+
+  get resultsForSearch(): any {
+    return this.musicService.searchbox;
+  }
+
   //Getting results from Service About the search done in Search Component
   get searchResults(): any {
-    return this.servicioService.searchResults;
+    return this.musicService.searchResults;
   }
   //Getting artist name from Service About the search done in Search Component
   get name(): any {
-    return this.servicioService.searchResults[0].artist.name;
+    return this.musicService.searchResults[0].artist.name;
   }
   //Getting image from Service About the search done in Search Component
 
   get image(): any {
-    return this.servicioService.searchResults[0].artist.picture_big;
+    return this.musicService.searchResults[0].artist.picture_big;
   }
   //Getting preview from Service About the search done in Search Component
 
   get preview(): any {
-    return this.servicioService.searchResults[0].preview;
+    return this.musicService.searchResults[0].preview;
   }
-  constructor(private servicioService: ServicioService) {}
+  constructor(public musicService: MusicService) {}
 
   // Function that sends info to Service when clicking in Fav artist
-  favoriteArtist() {
-    this.servicioService.favoriteArtist(this.name);
+  addFavoriteArtist() {
+    this.musicService.favoriteArtist(this.name);
+  }
+
+  addNewSong(event: any) {
+    var target = event.target || event.srcElement || event.currentTarget;
+    var idAttr = target.attributes.id;
+    var song = idAttr.nodeValue;
+    console.log(song);
+    this.musicService.favoriteSongs(song);
+  }
+
+  addNewAlbum(event: any) {
+    var target = event.target || event.srcElement || event.currentTarget;
+    var idAttr = target.attributes.id;
+    var album = idAttr.nodeValue;
+    console.log(album);
+    this.musicService.favoriteAlbums(album);
   }
 
   ngOnInit(): void {}

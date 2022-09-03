@@ -5,23 +5,35 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h4>{{ "yourFavorites" | translate }}</h4>
+            <a (click)="favi()"
+              ><h4>{{ "yourFavorites" | translate }}</h4></a
+            >
           </div>
         </div>
         <table class="table table-bordered">
           <thead class="thead-dark">
-            <tr>
-              <th>{{ "songs" | translate }}</th>
-              <th>{{ "albums" | translate }}</th>
-              <th>{{ "artists" | translate }}</th>
-            </tr>
+            <th>{{ "artists" | translate }}</th>
+            <th>{{ "songs" | translate }}</th>
+            <th>{{ "albums" | translate }}</th>
           </thead>
-
           <tbody>
-            <tr *ngFor="let item of favoriteArtists; let i = index">
-              <td scope="col">{{ item.name }}</td>
-              <td scope="col">{{ item.song }}</td>
-              <td scope="col">{{ item.album }}</td>
+            <tr>
+              <td scope="row">
+                <tr *ngFor="let item of favoriteArtists; let i = index">
+                  <p>{{ item }}</p>
+                  <p></p>
+                </tr>
+              </td>
+              <td scope="row">
+                <tr *ngFor="let item of favoriteSong; let i = index">
+                  <p scope="col">{{ item }}</p>
+                </tr>
+              </td>
+              <td scope="row">
+                <tr *ngFor="let item of favoriteAlbum; let i = index">
+                  <p scope="col">{{ item }}</p>
+                </tr>
+              </td>
             </tr>
           </tbody>
         </table>

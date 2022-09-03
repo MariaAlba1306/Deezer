@@ -5,13 +5,13 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h4>{{ "ResultsFor" | translate }} {{ name }}</h4>
+            <h4>{{ "ResultsFor" | translate }} {{ resultsForSearch }}</h4>
           </div>
         </div>
         <div class="card" style="width: 18rem">
           <img class="card-img-top" src="{{ image }}" alt="Card image cap" />
           <div class="card-body">
-            <h5 class="card-title">{{ name }}</h5>
+            <h5 class="card-title">search</h5>
 
             <p class="card-text">
               {{ image }}
@@ -20,10 +20,10 @@
               >Go somewhere</a
             > -->
             <a
-              href="list"
+              routerLink="/"
               class="btn btn-primary"
               ngModel="{{ name }}"
-              (click)="favoriteArtist()"
+              (click)="addFavoriteArtist()"
               >Añadir</a
             >
           </div>
@@ -35,30 +35,20 @@
           <tbody>
             <tr>
               <td scope="row">
-                <tr>
-                  Canción
-                </tr>
                 <tr *ngFor="let item of searchResults; let i = index">
-                  <td scope="col">{{ i }}.- {{ item.title }}</td>
-                </tr>
-              </td>
-              <td scope="row">
-                <tr>
-                  Artista
-                </tr>
-
-                <tr *ngFor="let item of searchResults; let i = index">
+                  <td></td>
+                  <td scope="col">{{ item.title }}</td>
                   <td scope="col">{{ item.duration }}</td>
-                </tr>
-              </td>
-              <td scope="row">
-                <tr *ngFor="let item of searchResults; let i = index">
                   <td scope="col">{{ item.artist.name }}</td>
-                </tr>
-              </td>
-              <td scope="row">
-                <tr *ngFor="let item of searchResults; let i = index">
-                  <td><button>Añadir</button></td>
+                  <td>
+                    <button
+                      routerLink="/"
+                      (click)="addNewSong($event)"
+                      id="{{ item.title }}"
+                    >
+                      Add
+                    </button>
+                  </td>
                 </tr>
               </td>
             </tr>
@@ -72,22 +62,19 @@
             <tr>
               <td scope="row">
                 <tr *ngFor="let item of searchResults; let i = index">
-                  <img src="{{ item.album.cover }}" />
-                </tr>
-              </td>
-              <td scope="row">
-                <tr *ngFor="let item of searchResults; let i = index">
-                  <td scope="col">{{ i }}.- {{ item.album.title }}</td>
-                </tr>
-              </td>
-              <td scope="row">
-                <tr *ngFor="let item of searchResults; let i = index">
+                  <th scope="row">Albums</th>
+                  <td scope="col"><img src="{{ item.album.cover }}" /></td>
+                  <td scope="col">{{ item.album.title }}</td>
                   <td scope="col">{{ item.artist.name }}</td>
-                </tr>
-              </td>
-              <td scope="row">
-                <tr *ngFor="let item of searchResults; let i = index">
-                  <td><button>Añadir</button></td>
+                  <td>
+                    <button
+                      routerLink="/"
+                      (click)="addNewAlbum($event)"
+                      id="{{ item.album.title }}"
+                    >
+                      Añadir
+                    </button>
+                  </td>
                 </tr>
               </td>
             </tr>

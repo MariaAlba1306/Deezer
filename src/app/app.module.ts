@@ -16,7 +16,7 @@ import {
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ServicioService } from './service/servicio.service';
+// import { MusicService } from './service/servicio.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +42,7 @@ import { ServicioService } from './service/servicio.service';
       },
     }),
   ],
-  providers: [ServicioService],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

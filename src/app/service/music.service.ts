@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-@Injectable()
-export class ServicioService {
+@Injectable({ providedIn: 'any' })
+export class MusicService {
   constructor() {}
   // Credentianls from RAPIDAPI
   options = {
@@ -17,18 +17,9 @@ export class ServicioService {
   artistInfo: any;
   // Fields  from searchbox in Search Page
   searchbox: any;
-  favoriteArtists = [
-    {
-      name: 'Mario',
-    },
-    {
-      name: 'Lucas',
-    },
-    { song: 'Yo quiero bailar' },
-    { song: 'Without me' },
-    { album: 'La vida loca' },
-    { album: 'Album inédito' },
-  ];
+  favoriteArtists: any = [];
+  favoriteSong: any = [];
+  favoriteAlbum: any = [];
 
   ngOnInit(): void {}
 
@@ -41,17 +32,19 @@ export class ServicioService {
       .then((response) => response.json())
       .then((response) => {
         this.searchResults = response.data;
+        console.log(searchbox);
+        this.searchbox = searchbox;
       })
       .catch((err) => console.error(err));
     //Artist API
-    let artistSearch =
-      'https://deezerdevs-deezer.p.rapidapi.com/artist/' + '13';
-    fetch(artistSearch, this.options)
-      .then((response) => response.json())
-      .then((response) => {
-        this.artistInfo = response.data;
-      })
-      .catch((err) => console.error(err));
+    // let artistSearch =
+    //   'https://deezerdevs-deezer.p.rapidapi.com/artist/' + '13';
+    // fetch(artistSearch, this.options)
+    //   .then((response) => response.json())
+    //   .then((response) => {
+    //     this.artistInfo = response.data;
+    //   })
+    //   .catch((err) => console.error(err));
   }
   // Save Favorite artist - receiving info from results page
 
@@ -60,5 +53,14 @@ export class ServicioService {
     // this.favoriteArtists = 'eminem';
     this.favoriteArtists?.push(name);
     console.log('hello', this.favoriteArtists);
+  }
+
+  favoriteSongs(song: any) {
+    this.favoriteSong?.push(song);
+    console.log('hello', this.favoriteSong);
+  }
+  favoriteAlbums(album: any) {
+    this.favoriteAlbum?.push(album);
+    console.log('hello', this.favoriteAlbum);
   }
 }

@@ -1,20 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { ServicioService } from 'src/app/service/servicio.service';
-import { Injectable } from '@angular/core';
+import { MusicService } from 'src/app/service/music.service';
+// import { Injectable } from '@angular/core';
 
-@Injectable()
+// @Injectable()
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css'],
-  providers: [ServicioService],
 })
 export class ListComponent implements OnInit {
-  constructor(public servicioService: ServicioService) {}
+  constructor(public musicService: MusicService) {}
   get favoriteArtists(): any {
-    return this.servicioService.favoriteArtists;
+    return this.musicService.favoriteArtists;
   }
+
+  get favoriteSong(): any {
+    return this.musicService.favoriteSong;
+  }
+  get favoriteAlbum(): any {
+    return this.musicService.favoriteAlbum;
+  }
+
   ngOnInit(): void {
+    console.log(this.favoriteArtists);
+  }
+
+  favi() {
     console.log(this.favoriteArtists);
   }
 }
