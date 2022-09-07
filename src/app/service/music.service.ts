@@ -74,7 +74,7 @@ export class MusicService {
       .then((response) => {
         this.genreResult = response.data;
         this.searchResults = '';
-
+        this.searchbox = '';
         console.log(this.genreResult);
       })
       .catch((err) => console.error(err));
