@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { filter } from 'rxjs';
 
 @Injectable({ providedIn: 'any' })
 export class MusicService {
@@ -20,6 +21,25 @@ export class MusicService {
   favoriteArtists: any = [];
   favoriteSong: any = [];
   favoriteAlbum: any = [];
+  yearFilter: number = 0;
+  genreFilter: string = '';
+  genreResult: any = '';
+  genero = [
+    {
+      id: 2,
+      name: 'African Music',
+      picture: 'https://api.deezer.com/genre/2/image',
+      picture_small:
+        'https://e-cdns-images.dzcdn.net/images/misc/703413adf47ad8a6001b438f7608a2be/56x56-000000-80-0-0.jpg',
+      picture_medium:
+        'https://e-cdns-images.dzcdn.net/images/misc/703413adf47ad8a6001b438f7608a2be/250x250-000000-80-0-0.jpg',
+      picture_big:
+        'https://e-cdns-images.dzcdn.net/images/misc/703413adf47ad8a6001b438f7608a2be/500x500-000000-80-0-0.jpg',
+      picture_xl:
+        'https://e-cdns-images.dzcdn.net/images/misc/703413adf47ad8a6001b438f7608a2be/1000x1000-000000-80-0-0.jpg',
+      type: 'genre',
+    },
+  ];
 
   ngOnInit(): void {}
 
@@ -34,17 +54,30 @@ export class MusicService {
         this.searchResults = response.data;
         console.log(searchbox);
         this.searchbox = searchbox;
+        this.genreResult = '';
       })
       .catch((err) => console.error(err));
-    //Artist API
-    // let artistSearch =
-    //   'https://deezerdevs-deezer.p.rapidapi.com/artist/' + '13';
-    // fetch(artistSearch, this.options)
-    //   .then((response) => response.json())
-    //   .then((response) => {
-    //     this.artistInfo = response.data;
-    //   })
-    //   .catch((err) => console.error(err));
+  }
+  filter(yearFilter: number, genreFilter: string) {
+    // to activate temporary CORs https://cors-anywhere.herokuapp.com/corsdemo
+
+    const corsAnywhere = 'https://cors-anywhere.herokuapp.com/';
+    let genreSearch = 'http://api.deezer.com/genre/' + genreFilter + '/artists';
+    fetch(corsAnywhere + genreSearch, {
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        this.genreResult = response.data;
+        this.searchResults = '';
+
+        console.log(this.genreResult);
+      })
+      .catch((err) => console.error(err));
   }
   // Save Favorite artist - receiving info from results page
 

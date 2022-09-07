@@ -13,6 +13,9 @@ export class SearchComponent implements OnInit {
   artists: string = '';
   inputField: FormControl = new FormControl();
   searchbox: string = '';
+  yearFilter: any;
+  genreFilter: string = '';
+  value: any;
 
   album: any;
   searchResults: any;
@@ -24,7 +27,25 @@ export class SearchComponent implements OnInit {
   get favoriteArtists(): any {
     return this.musicService.favoriteArtists;
   }
+  applyFilters() {
+    this.musicService.filter(this.yearFilter, this.selectedGenre);
+  }
 
-  openFilter() {}
+  selectedGenre = '';
+  selectedGenreValue = '';
+  onSelectedGenre(value: string): void {
+    this.selectedGenre = value;
+    console.log(this.selectedGenre);
+  }
+  onSelectedGenreId(id: string): void {
+    this.selectedGenreValue = id;
+    console.log('value', this.selectedGenreValue);
+  }
+  selectedYear = null;
+  onSelectedYear(selectedYear: any) {
+    return this.selectedYear;
+    console.log('hi');
+  }
+
   ngOnInit(): void {}
 }

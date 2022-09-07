@@ -13,30 +13,37 @@ export class ResultsComponent implements OnInit {
   get resultsForSearch(): any {
     return this.musicService.searchbox;
   }
+  get resultsForFilter(): any {
+    return this.musicService.genreFilter;
+  }
 
   //Getting results from Service About the search done in Search Component
   get searchResults(): any {
     return this.musicService.searchResults;
   }
   //Getting artist name from Service About the search done in Search Component
-  get name(): any {
-    return this.musicService.searchResults[0].artist.name;
-  }
-  //Getting image from Service About the search done in Search Component
+  // get name(): any {
+  //   return this.musicService.searchResults[0].artist.name;
+  // }
+  // //Getting image from Service About the search done in Search Component
 
-  get image(): any {
-    return this.musicService.searchResults[0].artist.picture_big;
-  }
+  // get image(): any {
+  //   return this.musicService.searchResults[0].artist.picture_big;
+  // }
   //Getting preview from Service About the search done in Search Component
 
   get preview(): any {
     return this.musicService.searchResults[0].preview;
   }
+
+  get genreResults(): any {
+    return this.musicService.genreResult;
+  }
   constructor(public musicService: MusicService) {}
 
   // Function that sends info to Service when clicking in Fav artist
   addFavoriteArtist() {
-    this.musicService.favoriteArtist(this.name);
+    this.musicService.favoriteArtist(this.searchResults.artist.name);
   }
 
   addNewSong(event: any) {
@@ -55,5 +62,14 @@ export class ResultsComponent implements OnInit {
     this.musicService.favoriteAlbums(album);
   }
 
-  ngOnInit(): void {}
+  goToDetails(event: any) {
+    var target = event.target || event.srcElement || event.currentTarget;
+    var idAttr = target.attributes.id;
+    var searchbox = idAttr.nodeValue;
+    console.log(searchbox);
+    this.musicService.searchBox(searchbox);
+  }
+  ngOnInit(): void {
+    console.log(this.genreResults);
+  }
 }
