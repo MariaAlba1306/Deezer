@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MusicService } from 'src/app/service/music.service';
+import { RouterOutlet, ActivatedRoute } from '@angular/router';
 // import { Injectable } from '@angular/core';
 
 // @Injectable()
@@ -9,7 +10,20 @@ import { MusicService } from 'src/app/service/music.service';
   styleUrls: ['./list.component.css'],
 })
 export class ListComponent implements OnInit {
-  constructor(public musicService: MusicService) {}
+  querySong = '';
+  queryArtist = '';
+  queryAlbum = '';
+
+  constructor(
+    public musicService: MusicService,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.activatedRoute.queryParams.subscribe((data) => {
+      this.queryAlbum = data['album'];
+      this.queryArtist = data['artist'];
+      this.querySong = data['song'];
+    });
+  }
   get favoriteArtists(): any {
     return this.musicService.favoriteArtists;
   }
@@ -21,11 +35,9 @@ export class ListComponent implements OnInit {
     return this.musicService.favoriteAlbum;
   }
 
-  ngOnInit(): void {
-    console.log(this.favoriteArtists);
-  }
-
   favi() {
     console.log(this.favoriteArtists);
   }
+
+  ngOnInit(): void {}
 }

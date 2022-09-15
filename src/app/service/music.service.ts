@@ -24,37 +24,47 @@ export class MusicService {
   yearFilter: number = 0;
   genreFilter: string = '';
   genreResult: any = '';
-  genero = [
-    {
-      id: 2,
-      name: 'African Music',
-      picture: 'https://api.deezer.com/genre/2/image',
-      picture_small:
-        'https://e-cdns-images.dzcdn.net/images/misc/703413adf47ad8a6001b438f7608a2be/56x56-000000-80-0-0.jpg',
-      picture_medium:
-        'https://e-cdns-images.dzcdn.net/images/misc/703413adf47ad8a6001b438f7608a2be/250x250-000000-80-0-0.jpg',
-      picture_big:
-        'https://e-cdns-images.dzcdn.net/images/misc/703413adf47ad8a6001b438f7608a2be/500x500-000000-80-0-0.jpg',
-      picture_xl:
-        'https://e-cdns-images.dzcdn.net/images/misc/703413adf47ad8a6001b438f7608a2be/1000x1000-000000-80-0-0.jpg',
-      type: 'genre',
-    },
-  ];
-
-  ngOnInit(): void {}
+  HeaderDetails: any = '';
+  ArtistDetails: any = '';
+  SongDetails: any = '';
 
   //Searchbox function - receiving info from search to results
   searchBox(searchbox: string) {
     //Search API
-    let search =
-      'https://deezerdevs-deezer.p.rapidapi.com/search?q=' + searchbox;
-    fetch(search, this.options)
+
+    const corsAnywhere = 'https://cors-anywhere.herokuapp.com/';
+    let search = 'https://api.deezer.com/search?q=' + searchbox;
+    fetch(corsAnywhere + search, {
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      }),
+    })
       .then((response) => response.json())
       .then((response) => {
         this.searchResults = response.data;
-        console.log(searchbox);
-        this.searchbox = searchbox;
         this.genreResult = '';
+        console.log(this.searchResults);
+      })
+      .catch((err) => console.error(err));
+  }
+  //Details function - receiving info from search to results
+  detailSearch(detailSearch: string) {
+    // //Search API
+    const corsAnywhere = 'https://cors-anywhere.herokuapp.com/';
+    let search = 'https://api.deezer.com/search?q=' + detailSearch;
+    fetch(corsAnywhere + search, {
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        this.HeaderDetails = response.data;
+        console.log(this.HeaderDetails);
       })
       .catch((err) => console.error(err));
   }
@@ -85,15 +95,12 @@ export class MusicService {
     console.log(name);
     // this.favoriteArtists = 'eminem';
     this.favoriteArtists?.push(name);
-    console.log('hello', this.favoriteArtists);
   }
 
   favoriteSongs(song: any) {
     this.favoriteSong?.push(song);
-    console.log('hello', this.favoriteSong);
   }
   favoriteAlbums(album: any) {
     this.favoriteAlbum?.push(album);
-    console.log('hello', this.favoriteAlbum);
   }
 }

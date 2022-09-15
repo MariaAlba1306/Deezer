@@ -8,6 +8,8 @@
             <a (click)="favi()"
               ><h4>{{ "yourFavorites" | translate }}</h4></a
             >
+            <p>{{ queryAlbum }}</p>
+            <p>{{ queryArtist }}</p>
           </div>
         </div>
         <table class="table table-bordered">
@@ -20,18 +22,39 @@
             <tr>
               <td scope="row">
                 <tr *ngFor="let item of favoriteArtists; let i = index">
-                  <p>{{ item }}</p>
+                  <a
+                    [routerLink]="['/detail']"
+                    [queryParams]="{
+                      artist: item
+                    }"
+                  >
+                    <p>{{ item }}</p></a
+                  >
                   <p></p>
                 </tr>
               </td>
               <td scope="row">
                 <tr *ngFor="let item of favoriteSong; let i = index">
-                  <p scope="col">{{ item }}</p>
+                  <a
+                    [routerLink]="['/detail']"
+                    [queryParams]="{
+                      song: item
+                    }"
+                  >
+                    <p scope="col">{{ item }}</p></a
+                  >
                 </tr>
               </td>
               <td scope="row">
                 <tr *ngFor="let item of favoriteAlbum; let i = index">
-                  <p scope="col">{{ item }}</p>
+                  <a
+                    [routerLink]="['/detail']"
+                    [queryParams]="{
+                      album: item
+                    }"
+                  >
+                    <p scope="col">{{ item }}</p></a
+                  >
                 </tr>
               </td>
             </tr>
@@ -42,3 +65,4 @@
     <!-- tarjetas laterales -->
   </div>
 </section>
+<router-outlet></router-outlet>
