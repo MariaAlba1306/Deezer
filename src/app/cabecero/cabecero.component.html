@@ -1,6 +1,13 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
-  <div class="container">
-    <a class="navbar-brand" routerLink="/">{{ "Deezer" | translate }}</a>
+  <div class="container col-md-1">
+    <button onclick="history.back()"><</button>
+  </div>
+  <div class="container col-md-11">
+    <a class="navbar-brand" routerLink="/">
+      <h1 class="animate-charcter">
+        {{ "Deezer" | translate }}
+      </h1>
+    </a>
     <div class="nav-item"></div>
     <span>
       <select #selectedLang (change)="switchLang(selectedLang.value)">

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MusicService } from 'src/app/service/music.service';
+import { MusicService } from 'src/app/api/service/music.service';
+import { ActivatedRoute } from '@angular/router';
 // import { Injectable } from '@angular/core';
 // @Injectable()
 @Component({
@@ -7,69 +8,92 @@ import { MusicService } from 'src/app/service/music.service';
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.css'],
 })
+@Input()
 export class ResultsComponent implements OnInit {
+  constructor(
+    public musicService: MusicService,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.activatedRoute.queryParams.subscribe((data) => {
+      this.querySong = data['song'];
+    });
+    this.activatedRoute.queryParams.subscribe((data) => {
+      this.querySearch = data['search'];
+    });
+  }
   favoriteSong: any;
+  querySong: any;
+  querySearch: any;
+
+  ngOnInit(): void {
+    this.musicService.searchBox(this.querySearch);
+    this.musicService.searchCharacteres;
+  }
+
+  //Getting value from Service when there's no results in the search
+  get noSearch(): any {
+    return this.musicService.noSearch;
+  }
+  //Getting search word from Service
 
   get resultsForSearch(): any {
     return this.musicService.searchbox;
-  }
-  get resultsForFilter(): any {
-    return this.musicService.genreFilter;
   }
 
   //Getting results from Service About the search done in Search Component
   get searchResults(): any {
     return this.musicService.searchResults;
   }
-  //Getting artist name from Service About the search done in Search Component
-  // get name(): any {
-  //   return this.musicService.searchResults[0].artist.name;
-  // }
-  // //Getting image from Service About the search done in Search Component
 
-  // get image(): any {
-  //   return this.musicService.searchResults[0].artist.picture_big;
-  // }
-  //Getting preview from Service About the search done in Search Component
-
-  get preview(): any {
-    return this.musicService.searchResults[0].preview;
+  // Getting artist name from Service About the search done in Search Component
+  get name(): any {
+    if (
+      this.resultsForSearch.toUpperCase() ===
+      this.musicService.searchResults[0].artist.name.toUpperCase()
+    )
+      return this.musicService.searchResults[0].artist.name;
   }
-
-  get genreResults(): any {
-    return this.musicService.genreResult;
-  }
-  constructor(public musicService: MusicService) {}
 
   // Function that sends info to Service when clicking in Fav artist
+  favorite: any;
   addFavoriteArtist() {
-    this.musicService.favoriteArtist(this.searchResults.artist.name);
+    this.musicService.favoriteArtist(this.searchResults[0].artist.name);
+    this.favorite = document.getElementById('favoriteArtist');
+    this.favorite.className = 'none';
   }
+  added: any;
+  // Function that sends info to Service when clicking in Fav Song
 
   addNewSong(event: any) {
     var target = event.target || event.srcElement || event.currentTarget;
     var idAttr = target.attributes.id;
     var song = idAttr.nodeValue;
-    console.log(song);
+    var NameAttr = target.attributes.name;
+    var name = NameAttr.nodeValue;
     this.musicService.favoriteSongs(song);
+    for (var i = 0; i < document.getElementsByName(name).length; i++) {
+      document.getElementsByName(name)[i].className = 'none';
+    }
   }
+  addedAlbum: any;
+  // Function that sends info to Service when clicking in Fav album
 
   addNewAlbum(event: any) {
     var target = event.target || event.srcElement || event.currentTarget;
     var idAttr = target.attributes.id;
+    var NameAttr = target.attributes.name;
+    var name = NameAttr.nodeValue;
     var album = idAttr.nodeValue;
-    console.log(album);
     this.musicService.favoriteAlbums(album);
+    for (var i = 0; i < document.getElementsByName(name).length; i++) {
+      document.getElementsByName(name)[i].className = 'none';
+    }
   }
-
+  // Function that goes to details of specific song/album
   goToDetails(event: any) {
     var target = event.target || event.srcElement || event.currentTarget;
     var idAttr = target.attributes.id;
     var searchbox = idAttr.nodeValue;
-    console.log(searchbox);
     this.musicService.searchBox(searchbox);
-  }
-  ngOnInit(): void {
-    console.log(this.genreResults);
   }
 }

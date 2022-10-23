@@ -1,117 +1,39 @@
 <div class="container">
   <div class="modal-body">
     <div class="row">
-      <div class="col-md-1"></div>
-      <div class="col-md-8">
+      <!-- <h3>{{ "welcome" | translate }}<span class="animate-charcter">:)</span></h3> -->
+      <div class="col-md-10">
         <input
+          id="search"
           type="text"
           name="nombre"
           class="form-control"
           placeholder="{{ 'search' | translate }}"
           [(ngModel)]="searchbox"
+          ng-required="expression"
+          (keydown)="keyDownFunction($event)"
+          method="get"
         />
+        <p *ngIf="insert" class="alert">{{ "insert" | translate }}</p>
       </div>
 
-      <div class="col-md-1">
-        <a class="btn btn-primary" routerLink="results" (click)="searchFinal()">
+      <div class="col-md-2">
+        <a
+          class="btn btn-primary animate-charcter"
+          routerLink="results"
+          [queryParams]="{
+            search: searchbox
+          }"
+          (click)="searchFinal()"
+          *ngIf="searchbox.length > 0"
+        >
           {{ "save" | translate }}
         </a>
       </div>
-      <div class="col-md-2">
-        <button type="button" data-bs-toggle="modal" data-bs-target="#myModal">
-          <img
-            src="https://t3.ftcdn.net/jpg/03/20/78/84/360_F_320788475_nEiLVViOBewea7taZWqNUR0lJAMTAaSo.jpg"
-          />
-        </button>
+      <div id="" *ngIf="array" class="lastsearches-title">
+        {{ "lastsearches" | translate }}
       </div>
-    </div>
-  </div>
-</div>
-<div class="container mt-5">
-  <div class="modal" id="myModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Filter</h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="mb-3">
-              <label class="form-label required">Year</label>
-              <input
-                type="number"
-                class="form-control"
-                [(ngModel)]="yearFilter"
-                (change)="(onSelectedYear)"
-              />
-            </div>
-            <div class="mb-3">
-              <br />
-              <form action="/action_page.php">
-                <label for="cars">Genre:</label>
-                <select
-                  id="genre"
-                  #genre
-                  (change)="onSelectedGenre(genre.value)"
-                  (change)="onSelectedGenreId(genre.id)"
-                >
-                  >
-                  <option value="0" id="all">All</option>
-                  <option value="132">{{ "Pop" | translate }}</option>
-                  <option value="116">{{ "Rap/Hip Hop" | translate }}</option>
-                  <option value="122">{{ "Reggaeton" | translate }}</option>
-                  <option value="152">{{ "Rock" | translate }}</option>
-                  <option value="113">{{ "Dance" | translate }}</option>
-                  <option value="165">{{ "R&B" | translate }}</option>
-                  <option value="85">{{ "Alternativo" | translate }}</option>
-                  <option value="106">{{ "Electro" | translate }}</option>
-                  <option value="466">{{ "Folk" | translate }}</option>
-                  <option value="144">{{ "Reggae" | translate }}</option>
-                  <option value="129">{{ "Jazz" | translate }}</option>
-                  <option value="67">{{ "Salsa" | translate }}</option>
-                  <option value="98">{{ "Clásica" | translate }}</option>
-                  <option value="464">{{ "Metal" | translate }}</option>
-                  <option value="173">
-                    {{ "Películas/Juegos" | translate }}
-                  </option>
-                  <option value="169">{{ "Soul & Funk" | translate }}</option>
-                  <option value="153">{{ "Blues" | translate }}</option>
-                  <option value="71">{{ "Cumbia" | translate }}</option>
-                  <option value="75">
-                    {{ "Música Brasileña" | translate }}
-                  </option>
-                  <option value="197">{{ "Latino" | translate }}</option>
-                  <option value="2">{{ "Música africana" | translate }}</option>
-                  <option value="16">
-                    {{ "Música asiática" | translate }}
-                  </option>
-                  <option value="81">{{ "Música india" | translate }}</option>
-                  <option value="95">{{ "Niños" | translate }}</option>
-                </select>
-              </form>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="submit"
-            class="btn btn-primary"
-            (click)="applyFilters()"
-            routerLink="results"
-            data-bs-dismiss="modal"
-          >
-            Filter
-          </button>
-          <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">
-            Cancel
-          </button>
-        </div>
-      </div>
+      <div id="lastResults"></div>
     </div>
   </div>
 </div>
@@ -120,5 +42,4 @@
   <!-- </section> -->
 
   <app-list></app-list>
-  <script></script>
 </section>

@@ -1,7 +1,9 @@
 import { identifierName } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MusicService } from 'src/app/service/music.service';
+import { MusicService } from 'src/app/api/service/music.service';
+
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-detail',
@@ -15,7 +17,8 @@ export class DetailComponent {
   detailSearch: any = '';
   constructor(
     public musicService: MusicService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public translate: TranslateService
   ) {}
 
   get Image(): any {
@@ -29,24 +32,24 @@ export class DetailComponent {
   }
   get Header(): any {
     if (this.song) {
-      return 'Canción: ' + this.musicService.HeaderDetails[0].title;
+      return this.musicService.HeaderDetails[0].title;
     } else if (this.album) {
-      return 'Album: ' + this.musicService.HeaderDetails[0].album.title;
+      return this.musicService.HeaderDetails[0].album.title;
     } else {
-      return 'Artista: ' + this.musicService.HeaderDetails[0].artist.name;
+      return this.musicService.HeaderDetails[0].artist.name;
     }
   }
   get Subheader(): any {
     if (this.song) {
-      return 'Album: ' + this.musicService.HeaderDetails[0].album.title;
+      return this.musicService.HeaderDetails[0].album.title;
     } else if (this.album) {
-      return 'Artista: ' + this.musicService.HeaderDetails[0].artist.name;
+      return this.musicService.HeaderDetails[0].artist.name;
     } else {
     }
   }
   get Subsubheader(): any {
     if (this.song) {
-      return 'Artista: ' + this.musicService.HeaderDetails[0].artist.name;
+      return this.musicService.HeaderDetails[0].artist.name;
     } else {
     }
   }
@@ -54,40 +57,22 @@ export class DetailComponent {
   searchDetail() {
     this.musicService.detailSearch(this.detailSearch);
   }
+
   ngOnInit(): void {
+    this.song = '';
+    this.album = '';
     this.route.queryParams.subscribe((params) => {
       this.album = params['album'];
       this.song = params['song'];
       this.artist = params['artist'];
       if (this.song) {
         this.detailSearch = this.song;
-        console.log(this.detailSearch);
       } else if (this.album) {
         this.detailSearch = this.album;
-        console.log(this.detailSearch);
       } else if (this.artist) {
         this.detailSearch = this.artist;
-        console.log(this.detailSearch);
       }
     });
     this.searchDetail();
   }
 }
-
-// detailSong() {
-//   this.musicService.goToDetails({
-//     artist: this.HeaderDetails,
-//     song: this.HeaderDetails,
-//     album: this.HeaderDetails,
-//     HeaderDetails: this.HeaderDetails,
-//   });
-//   if (this.artist) {
-//     this.Header = 'Artista: ' + this.HeaderDetails;
-//   } else if (this.song) {
-//     this.Header = 'Canción: ' + this.song;
-//     this.subheader = 'Artista: ' + this.HeaderDetails;
-//     console.log(this.HeaderDetails);
-//   } else if (this.album) {
-//     this.Header = 'Album: ' + this.album;
-//   }
-// }

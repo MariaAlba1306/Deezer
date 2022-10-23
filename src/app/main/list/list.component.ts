@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MusicService } from 'src/app/service/music.service';
+import { MusicService } from 'src/app/api/service/music.service';
 import { RouterOutlet, ActivatedRoute } from '@angular/router';
-// import { Injectable } from '@angular/core';
 
-// @Injectable()
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -13,6 +11,7 @@ export class ListComponent implements OnInit {
   querySong = '';
   queryArtist = '';
   queryAlbum = '';
+  searchbox = '';
 
   constructor(
     public musicService: MusicService,
@@ -35,9 +34,27 @@ export class ListComponent implements OnInit {
     return this.musicService.favoriteAlbum;
   }
 
-  favi() {
-    console.log(this.favoriteArtists);
-  }
+  modal: any;
+  cancel: any;
+  filter: any;
+  FilterText: string = '';
 
+  openFilter() {
+    this.modal = document.getElementById('MyModal2');
+    this.modal.style.display = 'flex';
+    this.cancel = document.getElementById('cancel');
+    this.cancel.style.display = 'block';
+    this.filter = document.getElementById('filter');
+    this.filter.style.display = 'none';
+  }
+  cancelFilter() {
+    this.modal = document.getElementById('MyModal2');
+    this.modal.style.display = 'none';
+    this.cancel = document.getElementById('cancel');
+    this.cancel.style.display = 'none';
+    this.filter = document.getElementById('filter');
+    this.filter.style.display = 'block';
+    this.FilterText = '';
+  }
   ngOnInit(): void {}
 }

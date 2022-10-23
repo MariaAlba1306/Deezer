@@ -5,64 +5,124 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <a (click)="favi()"
-              ><h4>{{ "yourFavorites" | translate }}</h4></a
+            <div class="col-md-11 filter">
+              <h4>
+                {{ "yourFavorites" | translate }}
+              </h4>
+            </div>
+            <div
+              *ngIf="
+                favoriteSong.length > 0 ||
+                favoriteAlbum.length > 0 ||
+                favoriteArtists.length > 0
+              "
+              class="col-md-1"
+              id="filter"
             >
-            <p>{{ queryAlbum }}</p>
-            <p>{{ queryArtist }}</p>
+              <a class="btn btn-primary" (click)="openFilter()">
+                {{ "filter" | translate }}
+              </a>
+            </div>
           </div>
         </div>
-        <table class="table table-bordered">
-          <thead class="thead-dark">
-            <th>{{ "artists" | translate }}</th>
-            <th>{{ "songs" | translate }}</th>
-            <th>{{ "albums" | translate }}</th>
-          </thead>
-          <tbody>
-            <tr>
-              <td scope="row">
-                <tr *ngFor="let item of favoriteArtists; let i = index">
-                  <a
-                    [routerLink]="['/detail']"
-                    [queryParams]="{
-                      artist: item
-                    }"
-                  >
-                    <p>{{ item }}</p></a
-                  >
-                  <p></p>
-                </tr>
-              </td>
-              <td scope="row">
-                <tr *ngFor="let item of favoriteSong; let i = index">
-                  <a
-                    [routerLink]="['/detail']"
-                    [queryParams]="{
-                      song: item
-                    }"
-                  >
-                    <p scope="col">{{ item }}</p></a
-                  >
-                </tr>
-              </td>
-              <td scope="row">
-                <tr *ngFor="let item of favoriteAlbum; let i = index">
-                  <a
-                    [routerLink]="['/detail']"
-                    [queryParams]="{
-                      album: item
-                    }"
-                  >
-                    <p scope="col">{{ item }}</p></a
-                  >
-                </tr>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      </div>
+      <div id="MyModal2" class="col-md-12">
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="FilterText"
+          style="background-color: white !important"
+          placeholder="{{ 'filterfavorites' | translate }}"
+        />
+        <div id="cancel">
+          <a class="btn btn-primary" (click)="cancelFilter()">
+            {{ "cancel" | translate }}
+          </a>
+        </div>
+      </div>
+      <table class="table">
+        <thead class="thead-dark" *ngIf="favoriteSong.length > 0">
+          <th class="">
+            {{ "artists" | translate }}
+          </th>
+          <th class="">{{ "songs" | translate }}</th>
+          <th class="">{{ "albums" | translate }}</th>
+        </thead>
+        <!-- <app-list [list]="favoriteArtists"></app-list>
+        <app-list [list]="favoriteSongs"></app-list> -->
+        <tbody>
+          <tr>
+            <td scope="row" class="album-row">
+              <tr
+                *ngFor="
+                  let artist of favoriteArtists | filter: FilterText;
+                  let i = index
+                "
+              >
+                <a
+                  class="link"
+                  [routerLink]="['/detail']"
+                  [queryParams]="{
+                    artist: artist
+                  }"
+                >
+                  <p>- {{ artist }}</p></a
+                >
+                <p></p>
+              </tr>
+            </td>
+            <td scope="row" class="album-row">
+              <tr
+                *ngFor="
+                  let song of favoriteSong | filter: FilterText;
+                  let i = index
+                "
+              >
+                <a
+                  class="link"
+                  [routerLink]="['/detail']"
+                  [queryParams]="{
+                    song: song
+                  }"
+                >
+                  <p scope="col">{{ song }}</p></a
+                >
+              </tr>
+            </td>
+            <td scope="row" class="album-row">
+              <tr
+                *ngFor="
+                  let item of favoriteAlbum | filter: FilterText;
+                  let i = index
+                "
+              >
+                <a
+                  class="link"
+                  [routerLink]="['/detail']"
+                  [queryParams]="{
+                    album: item
+                  }"
+                >
+                  <p scope="col">- {{ item }}</p></a
+                >
+              </tr>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div
+        *ngIf="
+          favoriteSong.length == 0 &&
+          favoriteAlbum.length == 0 &&
+          favoriteArtists.length == 0
+        "
+      >
+        <h6 class="noresults">{{ "noresults" | translate }}</h6>
+        <p></p>
       </div>
     </div>
-    <!-- tarjetas laterales -->
   </div>
+  <!-- tarjetas laterales -->
 </section>
+
 <router-outlet></router-outlet>

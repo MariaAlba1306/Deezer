@@ -1,3 +1,71 @@
 .navbar-brand {
   color: white;
+  font-size: 40px;
+}
+
+.animate-charcter {
+  text-transform: uppercase;
+  background-image: linear-gradient(
+    -225deg,
+    #319d89 0%,
+    #bb87f2 29%,
+    #ff1361 67%,
+    #fff800 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 4s linear infinite;
+  display: inline-block;
+  font-size: 40px;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
+
+select {
+  color: white;
+  font-size: 20px;
+  border: 0px;
+  border: 0.1px solid rgb(116, 113, 113) !important;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+button {
+  color: white;
+  font-size: 20px;
+  border: 0px;
+  border: 0.1px solid rgb(116, 113, 113) !important;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+
+
+select:hover {
+  text-transform: uppercase;
+  background-image: linear-gradient(
+    -225deg,
+    #319d89 0%,
+    #bb87f2 29%,
+    #ff1361 67%,
+    #fff800 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 4s linear infinite;
+  display: inline-block;
 }

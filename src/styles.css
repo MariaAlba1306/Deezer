@@ -1,5 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
 * {
   box-sizing: border-box;
-  background-color: #212529;
+  background-color: #212529 !important;
 }
+/* fonts */
+@font-face {
+  font-family: "wallie-fit";
+  src: url("https://d22j03ecumputt.cloudfront.net/fonts/Wallie-Fit.woff2")
+      format("woff2"),
+    url("//d22j03ecumputt.cloudfront.net/fonts/Wallie-Fit.woff") format("woff"),
+    url("//d22j03ecumputt.cloudfront.net/fonts/Wallie-Fit.ttf")
+      format("truetype");
+}
+     @font-face {
+        font-family: "wallie-chuncky";
+        src: url("https://d22j03ecumputt.cloudfront.net/fonts/Wallie-Chunky.woff2")
+            format("woff2"),
+          url("//d22j03ecumputt.cloudfront.net/fonts/Wallie-Chunky.woff")
+            format("woff"),
+          url("//d22j03ecumputt.cloudfront.net/fonts/Wallie-Chunky.ttf")
+            format("truetype");
+        font-weight: bold;
+      }
+
+* {
+  font-family: "wallie-fit" !important;
+}
+
+/* html {
+  background-image: url("pngegg (1).png");
+  background-size: 200px;
+  background-position: 0%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+} */

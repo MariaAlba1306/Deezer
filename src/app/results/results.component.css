@@ -1,5 +1,54 @@
+* {
+  color: white !important;
+  vertical-align: middle;
+  border: 0px;
+}
+h4 {
+  padding: 10px;
+  text-align: center;
+  font-size: 24px;
+  font-family: "wallie-chuncky" !important;
+  text-transform: uppercase;
+}
+h3 {
+  padding: 10px;
+  text-align: center;
+  font-size: 28px;
+  font-family: "wallie-fit" !important;
+  text-transform: uppercase;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+th {
+  font-size: 23px;
+}
+a:hover {
+  text-transform: uppercase;
+  background-image: linear-gradient(
+    -225deg,
+    #319d89 0%,
+    #bb87f2 29%,
+    #ff1361 67%,
+    #fff800 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 1s linear forwards;
+  display: inline-block;
+  font-size: 14px;
+}
 .table td {
   height: 60px;
+  text-transform: uppercase;
+  font-size: 14px;
 }
 .table {
   border-spacing: 10px;
@@ -18,4 +67,157 @@
 }
 .card-deck {
   width: 200px;
+}
+.song-row1 {
+  width: 40% !important;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-family: "wallie-chuncky";
+}
+.song-row2 {
+  width: 20% !important;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-family: "wallie-chuncky";
+}
+.song-row3 {
+  width: 20% !important;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-family: "wallie-chuncky";
+}
+.song-row4 {
+  width: 20% !important;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-family: "wallie-chuncky";
+}
+.album-row1 {
+  width: 10% !important;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-family: "wallie-chuncky";
+}
+.album-row2 {
+  width: 50% !important;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-family: "wallie-chuncky";
+}
+.album-row3 {
+  width: 20% !important;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-family: "wallie-chuncky";
+}
+.album-row4 {
+  width: 20% !important;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-family: "wallie-chuncky";
+}
+
+.btn-primary {
+  /* background-color: #ff1361 !important; */
+  --bs-btn-border-color: transparent;
+  width: 100px;
+  text-transform: uppercase;
+  /* border-bottom: 0.5px solid white !important; */
+  color: white;
+  font-size: 20px;
+  border: 0px;
+  background-color: #212529 !important;
+
+  /* border-bottom: 0.5px solid white !important; */
+  border: 0.1px solid rgb(116, 113, 113) !important;
+  --bs-btn-border-color: transparent;
+  width: 120px;
+  font-family: "wallie-chuncky" !important;
+}
+
+.mt-5 {
+  color: white !important;
+}
+
+.modal-content {
+  background-color: #212529 !important;
+}
+
+.card-subheader {
+  border-bottom: 1px solid white;
+}
+
+.btn-primary:hover {
+  text-transform: uppercase;
+  background-image: linear-gradient(
+      -225deg,
+      #319d89 0%,
+      #bb87f2 29%,
+      #ff1361 67%,
+      #fff800 100%
+    ),
+    #6db3f2 !important;
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 2s linear infinite;
+  display: inline-block;
+  font-size: 20px;
+  font-family: "wallie-chuncky";
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.results {
+  font-family: "wallie-chuncky";
+}
+
+.card-img-top {
+  border-radius: 90%;
+  width: 200px;
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: default;
+  border: 0px !important;
+  font-family: "wallie-fit" !important;
+  color: white;
+  font-size: 20px;
+  border: 0px;
+  text-align: center;
+  vertical-align: middle;
+}
+.disabled2 {
+  display: none;
+}
+
+.card-title {
+  text-transform: uppercase !important;
+  font-family: "wallie-chuncky" !important;
+  font-size: 30px;
+  position: absolute;
+}
+
+.songs-list {
+  width: 110px;
+  height: 110px;
+  overflow: scroll;
+}
+
+.none {
+  display: none !important;
+}
+#favoriteArtist {
+  margin-top: 20px !important;
+  position: absolute;
+  bottom: 20px;
 }

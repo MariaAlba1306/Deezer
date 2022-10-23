@@ -1,125 +1,220 @@
 <section id="clientes">
   <div class="container">
+    <app-loading></app-loading>
+  </div>
+</section>
+<section id="clientes">
+  <div *ngIf="noSearch" class="container">
+    <h3>No results</h3>
+  </div>
+</section>
+<section *ngIf="searchResults && !noSearch" id="clientes">
+  <div class="container">
     <div class="row">&nbsp;</div>
     <div class="row">
       <div class="col-md-12">
         <div class="card">
-          <div *ngIf="genreResults" class="card-header">
-            <h4>{{ "ResultsFor" | translate }} {{ resultsForSearch }}</h4>
-          </div>
-          <div *ngIf="searchResults" class="card-header">
-            <h4>{{ "ResultsFor" | translate }} {{ resultsForSearch }}</h4>
-          </div>
-        </div>
-        <!-- <div class="card" style="width: 18rem">
-          <img
-            class="card-img-top"
-            *ngIf="searchResults.artist.picture_big"
-            src="{{ searchResults.artist.picture_big }}"
-            alt="Card image cap"
-          />
-          <div class="card-body">
-            <h5 class="card-title">search</h5>
-
-            <p *ngIf="searchResults.artist.name" class="card-text">
-              {{ searchResults.artist.name }}
-            </p>
-            <!-- <a href="{{ preview }}" class="btn btn-primary" ngModel="{{ name }}"
-              >Go somewhere</a
-            > -->
-        <!-- <a
-              routerLink="/"
-              class="btn btn-primary"
-              ngModel="{{ searchResults.artist.name }}"
-              *ngIf="searchResults.artist.name"
-              (click)="addFavoriteArtist()"
-              >Añadir</a
-            >
-          </div>
-        </div> -->
-        <!-- <div *ngFor="let item of genreResults; let i = index">
-          <div class="card" style="width: 18rem">
-            <img
-              class="card-img-top"
-              src="{{ item.album.cover }}"
-              alt="Card image cap"
-            />
-            <div class="card-body">
-              <h5 class="card-title">search</h5>
-
-              <p class="card-text">
-                {{ item.artist.name }}
-              </p>
-            </div>
-          </div>
-        </div> -->
-        <div class="row" *ngIf="genreResults">
-          <div class="col-sm-3" *ngFor="let hi of genreResults; let i = index">
-            <div class="card">
-              <div class="card-body">
-                <img src="{{ hi.picture }}" alt="" />
-                <h5 class="card-title">{{ hi.name }}</h5>
-              </div>
-            </div>
+          <div class="card-header">
+            <h3>
+              {{ "ResultsFor" | translate }}
+              <span class="results">{{ resultsForSearch }}</span>
+            </h3>
           </div>
         </div>
-
-        <table *ngIf="searchResults" class="table table-dark">
-          <thead>
-            <th scope="row">Songs</th>
-          </thead>
-          <tbody>
-            <tr>
-              <td scope="row">
-                <tr *ngFor="let item of searchResults; let i = index">
-                  <td></td>
-                  <td scope="col">
-                    <a
-                      routerLink="/detail"
-                      (click)="goToDetails($event)"
-                      id="{{ item.id }}"
-                      >{{ item.title }}</a
-                    >
-                  </td>
-                  <td scope="col">{{ item.duration }}</td>
-                  <td scope="col">{{ item.artist.name }}</td>
-                  <td>
-                    <button (click)="addNewSong($event)" id="{{ item.title }}">
-                      Add
-                    </button>
-                  </td>
-                </tr>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <table *ngIf="searchResults" class="table table-dark">
-          <thead>
-            <th scope="row">Albums</th>
-          </thead>
-          <tbody>
-            <tr>
-              <td scope="row">
-                <tr *ngFor="let item of searchResults; let i = index">
-                  <th scope="row">Albums</th>
-                  <td scope="col"><img src="{{ item.album.cover }}" /></td>
-                  <td scope="col">{{ item.album.title }}</td>
-                  <td scope="col">{{ item.artist.name }}</td>
-                  <td>
-                    <button
-                      (click)="addNewAlbum($event)"
-                      id="{{ item.album.title }}"
-                    >
-                      Añadir
-                    </button>
-                  </td>
-                </tr>
-              </td>
-            </tr>
-          </tbody>
-        </table>
       </div>
+      <div class="card mb-10" *ngIf="name" style="max-width: 540px">
+        <div class="row no-gutters">
+          <div class="col-md-1"></div>
+          <div class="col-md-4">
+            <img
+              src="{{ searchResults[0].artist.picture_xl }}"
+              class="card-img"
+              alt="..."
+            />
+          </div>
+          <div class="col-md-7">
+            <div class="card-body">
+              <h5 class="card-title">{{ searchResults[0].artist.name }}</h5>
+
+              <a
+                class="btn btn-primary"
+                id="favoriteArtist"
+                (click)="addFavoriteArtist()"
+              >
+                {{ "add" | translate }}</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="searchResults" class="card-subheader">
+        <h4>{{ "songs" | translate }}</h4>
+      </div>
+      <table *ngIf="searchResults" class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col" class="song-row1">{{ "song" | translate }}</th>
+
+            <th scope="col" class="song-row2">
+              {{ "duration" | translate }}
+            </th>
+
+            <th scope="col" class="song-row3">{{ "artist" | translate }}</th>
+
+            <th scope="col" class="song-row4"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let item of searchResults; let i = index"
+            style="position: relative"
+          >
+            <td scope="col" class="album-row">
+              <a
+                [routerLink]="['/detail']"
+                [queryParams]="{
+                  song: item.title
+                }"
+                (click)="goToDetails($event)"
+                id="{{ item.id }}"
+                >{{ item.title }}</a
+              >
+            </td>
+            <td scope="col" class="album-row">
+              {{ item.duration * 1000 | date: "mm:ss" }}
+            </td>
+            <td scope="col" class="co3">
+              <a
+                [routerLink]="['/detail']"
+                [queryParams]="{
+                  artist: item.artist.name
+                }"
+                (click)="goToDetails($event)"
+                id="{{ item.id }}"
+              >
+                {{ item.artist.name }}</a
+              >
+            </td>
+            <td>
+              <tr>
+                <div
+                  scope="col"
+                  class="song-button"
+                  style="
+                    background-color: #212529 !important;
+                    position: absolute;
+                    z-index: 3;
+                  "
+                >
+                  <a
+                    class="btn btn-primary"
+                    (click)="addNewSong($event)"
+                    name="{{ item.title + item.artist.name }}"
+                    id="{{ item.title }}"
+                  >
+                    {{ "add" | translate }}
+                  </a>
+                </div>
+                <div
+                  scope="col"
+                  class="song-button"
+                  style="
+                    position: relative;
+                    background-color: #212529 !important;
+                    position: absolute;
+                    z-index: 1;
+                  "
+                >
+                  <a class="btn btn-primary disabled" style="z-index: 1">
+                    {{ "added" | translate }}
+                  </a>
+                </div>
+              </tr>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="searchResults" class="card-subheader">
+        <h4>{{ "albums" | translate }}</h4>
+      </div>
+      <table *ngIf="searchResults" class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col" class="album-row1"></th>
+
+            <th scope="col" class="album-row2">{{ "title" | translate }}</th>
+
+            <th scope="col" class="album-row3">{{ "artist" | translate }}</th>
+
+            <th scope="col" class="album-row4"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of searchResults; let i = index">
+            <td scope="col"><img src="{{ item.album.cover }}" /></td>
+            <td scope="col">
+              <a
+                [routerLink]="['/detail']"
+                [queryParams]="{
+                  album: item.title
+                }"
+                (click)="goToDetails($event)"
+                id="{{ item.id }}"
+                >{{ item.album.title }}</a
+              >
+            </td>
+            <td scope="col">
+              <a
+                [routerLink]="['/detail']"
+                [queryParams]="{
+                  artist: item.title
+                }"
+                (click)="goToDetails($event)"
+                id="{{ item.id }}"
+                name="{{ item.album + item.artist.name }}"
+                >{{ item.artist.name }}</a
+              >
+            </td>
+            <td>
+              <tr>
+                <div
+                  scope="col"
+                  class="song-button"
+                  style="
+                    background-color: #212529 !important;
+                    position: absolute;
+                    z-index: 3;
+                  "
+                >
+                  <a
+                    class="btn btn-primary"
+                    name="{{ item.album.title }}"
+                    (click)="addNewAlbum($event)"
+                    id="{{ item.album.title }}"
+                  >
+                    {{ "add" | translate }}
+                  </a>
+                </div>
+                <div
+                  scope="col"
+                  class="song-button"
+                  style="
+                    position: relative;
+                    background-color: #212529 !important;
+                    position: absolute;
+                    z-index: 1;
+                  "
+                >
+                  <a class="btn btn-primary disabled" style="z-index: 1">
+                    {{ "added" | translate }}
+                  </a>
+                </div>
+              </tr>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <!-- tarjetas laterales -->
   </div>
+  <!-- tarjetas laterales -->
 </section>

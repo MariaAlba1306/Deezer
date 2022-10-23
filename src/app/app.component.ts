@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { MusicService } from './service/music.service';
+import { MusicService } from './api/service/music.service';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +8,6 @@ import { MusicService } from './service/music.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  searchFinal(searchbox: any) {
-    console.log('soy el padre');
-    console.log(searchbox);
-  }
   title = 'DeezerMaria';
   searchResults: any;
   constructor(
@@ -24,6 +20,7 @@ export class AppComponent {
     translate.setDefaultLang('en');
     // }
   }
+
   ngOnInit() {
     this.searchResults = this.musicService.searchResults;
   }
