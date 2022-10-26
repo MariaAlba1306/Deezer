@@ -1,0 +1,38 @@
+<div
+  *ngIf="song || artist || album"
+  class="card mb-10"
+  style="max-width: 540px"
+>
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="{{ Image }}" class="card-img" alt="..." />
+    </div>
+    <div class="col-md-8">
+      <div class="card-body" *ngIf="song">
+        <p class="card-text">
+          <span class="titles">{{ "song" | translate }}:</span> {{ Header }}
+
+          <br />
+          <span class="titles">{{ "album" | translate }}:</span> {{ Subheader }}
+          <br />
+          <span class="titles">{{ "artist" | translate }}:</span>
+          {{ Subsubheader }}
+        </p>
+      </div>
+      <div class="card-body" *ngIf="album">
+        <p class="card-text">
+          <span class="titles">{{ "album" | translate }}:</span> {{ Header }}
+          <br />
+          <span class="titles">{{ "artist" | translate }}:</span>
+          {{ Subheader }}
+        </p>
+      </div>
+      <div class="card-body" *ngIf="artist">
+        <h5 class="card-title">
+          <span class="titles">{{ "artist" | translate }}:</span> {{ Header }}
+        </h5>
+      </div>
+    </div>
+  </div>
+</div>
+<app-loading></app-loading>

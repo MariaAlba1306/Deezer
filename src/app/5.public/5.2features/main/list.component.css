@@ -1,0 +1,113 @@
+th {
+  text-align: center;
+  font-size: 25x;
+  color: #fff;
+}
+h4 {
+  text-align: center;
+  font-family: "wallie-chuncky" !important;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+}
+
+#MyModal2 {
+  display: none;
+}
+#cancel {
+  display: none;
+  padding-left: 30px;
+}
+div {
+  border: 0px;
+}
+
+p {
+  text-align: left;
+}
+.card-header {
+  display: flex;
+}
+.col-md-12 {
+  border-radius: 30px;
+  padding: 10px;
+}
+.table {
+  border: 0px;
+}
+.btn-primary {
+  color: white;
+  font-size: 14px;
+  border: 0px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  border: 0.1px solid rgb(116, 113, 113) !important;
+}
+.noresults {
+  text-align: center !important;
+  display: block !important;
+  color: white !important;
+}
+
+.album-row {
+  width: 33% !important;
+  text-decoration: none;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-family: "wallie-chuncky";
+  text-align: left;
+}
+
+.animate-charcter {
+  text-transform: uppercase;
+  background-image: linear-gradient(
+    -225deg,
+    #319d89 0%,
+    #bb87f2 29%,
+    #ff1361 67%,
+    #fff800 100%
+  );
+  background-color: #fff;
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 2s linear forwards;
+  font-size: 30px;
+}
+
+p:hover,
+.btn-primary:hover {
+  text-transform: uppercase;
+  background-image: linear-gradient(
+    -225deg,
+    #319d89 0%,
+    #bb87f2 29%,
+    #ff1361 67%,
+    #fff800 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 1s linear forwards;
+  display: inline-block;
+  font-size: 14px;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}

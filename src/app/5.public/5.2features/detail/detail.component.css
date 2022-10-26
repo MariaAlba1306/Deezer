@@ -1,0 +1,22 @@
+.card-img-top {
+  width: 200px;
+  margin: 0 auto;
+}
+.card {
+  width: 600px;
+  margin: 0 auto;
+  margin-top: 20px;
+  padding: 30px;
+}
+
+* {
+  color: white;
+  font-family: "wallie-fit";
+  text-transform: uppercase;
+  border: 0px;
+}
+
+.titles {
+  font-size: 25px;
+  font-family: "wallie-chuncky" !important;
+}
